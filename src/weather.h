@@ -10,6 +10,8 @@ typedef struct weather
     char text[50];
     char icon[5];
     char temp[5];
+    char aqi[5];
+    char aqi_descr[30];
 }weather_t;
 
 typedef struct aqi

@@ -6,10 +6,10 @@
  *        2. display Chinese lunar date of today information
  *        3. display the F1 racing calendar of season 2023
  * @version 1.0
- * @date 2023-03-30
- * 
+ * @date 2023-04-21
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "main.h"
@@ -38,7 +38,7 @@ U8G2_FOR_ADAFRUIT_GFX       u8g2;
 
 /**
  * @brief interrupt handler for button press
- * 
+ *
  */
 void IRAM_ATTR isrButton()
 {
@@ -57,13 +57,13 @@ void IRAM_ATTR isrButton()
 
 /**
  * @brief connect to wifi
- * 
+ *
  */
 void connectWiFi()
 {
     Serial.begin(115200);
     Serial.print("Connect to WiFi ");
-    
+
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
     while(WiFi.status() != WL_CONNECTED)
@@ -92,18 +92,24 @@ void setup()
         Serial.println(weather_today.text);
         Serial.println(weather_today.temp);
         Serial.println(weather_today.icon);
+#ifndef USE_QWEATHER
+        Serial.println(weather_today.aqi);
+        Serial.println(weather_today.aqi_descr);
+#endif
     }
     else
     {
         Serial.println("Failed to obtain weather information");
     }
 
-    status = getAQI(&aqi_today, location);  // AQI
-    Serial.println(aqi_today.aqi);
-    Serial.println(aqi_today.category);
+#ifdef USE_QWEATHER
+//     status = getAQI(&aqi_today, location);  // AQI
+//     Serial.println(aqi_today.aqi);
+//     Serial.println(aqi_today.category);
+#endif
 
-    date_today = getCurrentDate();  // date 
-    
+    date_today = getCurrentDate();  // date
+
     status = getLunarDate(&date_today, &lunar_date_today);  // lunar date
     if (status == SUCCESS)
     {
@@ -119,10 +125,10 @@ void setup()
         Serial.println("Failed to obtaian lunar information");
     }
 
-    /* Check battery voltage */
-#if defined(BATTERY_CHECK_SUPPORT)
-    battery_is_low = checkBatteryIsLow();
-#endif
+//     /* Check battery voltage */
+// #if defined(BATTERY_CHECK_SUPPORT)
+//     battery_is_low = checkBatteryIsLow();
+// #endif
 
     /* Display Information on EPD */
     displayInit();
