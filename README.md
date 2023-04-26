@@ -33,6 +33,15 @@ Edit the following part in the file `main.h`, note that the value of `MY_CITY` a
 #define JUHE_API_KEY            "YOUR API KEY"  // 聚合数据API
 ```
 
+## 其他墨水屏支持 (Support for other E-ink displays)
+本项目电路仅支持Adafruit的2.7寸墨水屏模块，如需使用其他屏幕，需对电路进行修改。
+
+软件部分可以使用[GxEPD](https://github.com/ZinggJM/GxEPD)库，支持市面上大部分墨水屏。
+
+The hardware circuit **only** applies for the the 2.7'' display from Adafruit. If you are using other displays, the circuit needs to be modified.
+
+The nice library [GxEPD](https://github.com/ZinggJM/GxEPD) supports a great number of E-ink displays, you can use this library to best suits your display.
+
 ## 实际效果 (Realistic view)
 ![image](https://user-images.githubusercontent.com/27411560/233379606-f2571505-afa2-466f-8786-9120ef67537a.png)
 ![image](https://user-images.githubusercontent.com/27411560/233378725-484a5d8b-4667-4cab-806c-7171c48d94b4.png)
